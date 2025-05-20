@@ -7,11 +7,6 @@ Q_eq, P_eq = 10, 50    # original equilibrium
 P_new      = 40        # new, lower price
 Q_max      = 40        # x-axis limit
 
-st.markdown("""
-### Consumer Surplus & Demand
----
-""")
-
 # ── SLIDER ──
 s = st.slider("Slope of Demand Curve", 0.5, 5.0, 1.0, 0.1)
 
