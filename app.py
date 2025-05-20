@@ -111,8 +111,18 @@ if Q_new > Q_eq:
 # Lock axes at 0–40 & 0–100
 fig.update_layout(
     xaxis=dict(range=[0, Q_max], autorange=False, fixedrange=True, title="Quantity"),
-    yaxis=dict(range=[0, 100], autorange=False, fixedrange=True, title="Price"),
-    width=1400, height=800
+    yaxis=dict(range=[0, 100],  autorange=False, fixedrange=True, title="Price"),
+    
+    # ← New legend settings:
+    legend=dict(
+        orientation="h",     # horizontal legend
+        yanchor="top",
+        y=-0.2,              # move it below the plot (tweak as needed)
+        xanchor="center",
+        x=0.5                # center horizontally
+    ),
+    
+    width=800, height=600
 )
 
 st.plotly_chart(fig)
