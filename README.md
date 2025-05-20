@@ -23,4 +23,4 @@ Use the **slider** to change the **slope of the demand curve** (i.e., its elasti
 
 ## ▶️ Try the App
 
-**[🌐 Click here to use the live app →](https://health-vox-dev-1.streamlit.app/)**
+**[🌐 Click here to use the live app](https://health-vox-dev-1.streamlit.app/)**
