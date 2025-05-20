@@ -7,6 +7,11 @@ Q_eq, P_eq = 10, 50    # original equilibrium
 P_new      = 40        # new, lower price
 Q_max      = 40        # x-axis limit
 
+st.markdown("""
+### Consumer Surplus & Demand
+---
+""")
+
 # ── SLIDER ──
 s = st.slider("Slope of Demand Curve", 0.5, 5.0, 1.0, 0.1)
 
@@ -116,6 +121,7 @@ fig.update_layout(
     width=800, height=600
 )
 
+st.plotly_chart(fig)
 
 st.markdown("""
 ### Consumer Surplus + Demand
@@ -127,5 +133,3 @@ This app visualizes **consumer surplus (CS)** under a linear demand curve that a
 
 ---
 """)
-
-st.plotly_chart(fig)
