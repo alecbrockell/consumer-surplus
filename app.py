@@ -37,12 +37,17 @@ add_cs   = rect_cs + tri_cs              # now defined!
 total_cs = orig_cs + add_cs              # and total CS
 
 # ── DISPLAY NUMBERS ──
-st.markdown(f"""
-**Demand Curve:** P = {b:.1f} – {s:.1f}·Q  
-**Original Consumer Surplus:** {orig_cs:.1f}  
-**Additional Consumer Surplus:** {add_cs:.1f}  
-**Total Consumer Surplus:** {total_cs:.1f}
-""")
+st.markdown(
+    f"""
+    <div style="text-align: center; font-size:18px; line-height:1.4;">
+      <p><strong>Demand Curve:</strong> P = {b:.1f} – {s:.1f}·Q</p>
+      <p><strong>Original Consumer Surplus:</strong> {orig_cs:.1f}</p>
+      <p><strong>Additional Consumer Surplus:</strong> {add_cs:.1f}</p>
+      <p><strong>Total Consumer Surplus:</strong> {total_cs:.1f}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # ── PREPARE PLOTTING DATA ──
 Q  = np.linspace(0, Q_max, 400)
