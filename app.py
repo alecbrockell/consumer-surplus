@@ -30,7 +30,7 @@ total_cs = orig_cs + add_cs              # and total CS
 # ── DISPLAY NUMBERS ──
 st.markdown(
     f"""
-    <div style="text-align: center; font-size:18px; line-height:1.4;">
+    <div style="text-align: center; font-size:14px; line-height:1.4;">
       <p><strong>Demand Curve:</strong> P = {b:.1f} – {s:.1f}·Q</p>
       <p><strong>Original Consumer Surplus:</strong> {orig_cs:.1f}</p>
       <p><strong>Additional Consumer Surplus:</strong> {add_cs:.1f}</p>
