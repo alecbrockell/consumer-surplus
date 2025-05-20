@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 
 # ─── PARAMETERS ───
 Q_eq, P_eq = 10, 50
-P_new = 40
+P_new = 45
 
 # ─── SLIDER ───
 s = st.slider("Slope of Demand Curve", 0.5, 5.0, 1.0, 0.1)
