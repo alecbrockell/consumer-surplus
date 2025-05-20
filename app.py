@@ -18,9 +18,6 @@ Use the slider to change the **slope of the demand curve** (i.e., elasticity) an
 
 """)
 
-# ── SLIDER ──
-s = st.slider("Slope of Demand Curve", 0.5, 5.0, 1.0, 0.1)
-
 # ── CALCULATIONS ──
 b = P_eq + s * Q_eq                      # demand intercept for pivot
 orig_cs = 0.5 * s * Q_eq**2              # original CS up to Q_eq
@@ -50,6 +47,9 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# ── SLIDER ──
+s = st.slider("Slope of Demand Curve", 0.5, 5.0, 1.0, 0.1)
 
 # ── PREPARE PLOTTING DATA ──
 Q  = np.linspace(0, Q_max, 400)
