@@ -13,61 +13,70 @@ import plotly.graph_objects as go
 
 # ─── PARAMETERS ───
 Q_eq, P_eq = 10, 50
-P_new = 45
+P_new     = 40
+Q_max     = 40   # ← how far out to draw your curves
 
-# ─── SLIDER ───
+# ─── SLIDER & CALCS ───
 s = st.slider("Slope of Demand Curve", 0.5, 5.0, 1.0, 0.1)
-
-# ─── CALCULATIONS ───
-b       = P_eq + s * Q_eq
+b       = P_eq + s*Q_eq
 orig_cs = 0.5 * s * Q_eq**2
+# … compute add_cs, total_cs as before …
 
-Q_new   = (b - P_new)/s
-rect    = (P_eq - P_new) * Q_eq
-tri     = b*(Q_new-Q_eq) - 0.5*s*(Q_new**2 - Q_eq**2) - P_new*(Q_new-Q_eq)
-add_cs  = rect + tri
-total_cs= orig_cs + add_cs
-
-# **This Markdown now lives immediately after the slider**
-st.markdown(f"""
-**Demand Curve:** P = {b:.1f} – {s:.1f}·Q  
-**Original CS:** {orig_cs:.1f}  
-**Additional CS:** {add_cs:.1f}  
-**Total CS:** {total_cs:.1f}
-""")
-
-# ─── PLOT ───
-Q = np.linspace(0, 2*Q_eq, 400)
+# ─── GRID FOR PLOTTING ───
+Q = np.linspace(0, Q_max, 400)   # ← extend grid to 40
 P_d = b - s*Q
 
+# ─── BUILD FIGURE ───
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=Q, y=P_d, mode='lines', name='Demand'))
-fig.add_trace(go.Scatter(x=[0,2*Q_eq], y=[P_eq,P_eq], mode='lines', name='Original Price', line=dict(dash='dash')))
-fig.add_trace(go.Scatter(x=[0,2*Q_eq], y=[P_new,P_new], mode='lines', name='New Price', line=dict(color='purple', dash='dot')))
 
-# Original CS poly
-Qs = Q[Q<=Q_eq]
+# Demand line
+fig.add_trace(go.Scatter(x=Q, y=P_d, mode='lines', name='Demand'))
+
+# Original Price line
 fig.add_trace(go.Scatter(
-    x=np.concatenate([Qs,Qs[::-1]]),
+    x=[0, Q_max], y=[P_eq, P_eq],
+    mode='lines', name='Original Price',
+    line=dict(dash='dash')
+))
+
+# New Price line
+fig.add_trace(go.Scatter(
+    x=[0, Q_max], y=[P_new, P_new],
+    mode='lines', name='New Price',
+    line=dict(color='purple', dash='dot')
+))
+
+# Original CS shading (still only up to Q_eq)
+Qs = Q[Q <= Q_eq]
+fig.add_trace(go.Scatter(
+    x=np.concatenate([Qs, Qs[::-1]]),
     y=np.concatenate([b - s*Qs, np.full_like(Qs, P_eq)]),
     fill='toself', name='Original CS', opacity=0.4
 ))
 
-# Additional CS poly
-Qseq = Q[(Q>=Q_eq)&(Q<=Q_new)]
+# Additional CS shading (only between Q_eq and wherever demand hits P_new)
+Q_new = (b - P_new)/s
+Qadd  = Q[(Q >= Q_eq) & (Q <= Q_new)]
 fig.add_trace(go.Scatter(
-    x=np.concatenate([[0,Q_eq], Qseq, [Q_new,0]]),
-    y=np.concatenate([[P_eq,P_eq], b - s*Qseq, [P_new,P_new]]),
-    fill='toself', name='Additional CS', fillcolor='purple', line=dict(color='purple'), opacity=0.4
+    x=np.concatenate([[Q_eq], Qadd, [Q_new], [Q_eq]]),
+    y=np.concatenate([[P_eq], (b - s*Qadd), [P_new], [P_eq]]),
+    fill='toself', name='Additional CS', fillcolor='purple',
+    line=dict(color='purple'), opacity=0.4
 ))
 
-# **Lock axes here**
+# ─── FREEZE AXES AT 0–40 × 0–100 ───
 fig.update_layout(
-    xaxis=dict(range=[0,40], autorange=False, fixedrange=True, title="Quantity"),
-    yaxis=dict(range=[0,100], autorange=False, fixedrange=True, title="Price"),
-    width=1400, height=800,
-    title="Consumer Surplus Before & After Price Drop",
-    title_x=0.5,
+    xaxis=dict(range=[0, Q_max], autorange=False, fixedrange=True, title="Quantity"),
+    yaxis=dict(range=[0, 100], autorange=False, fixedrange=True, title="Price"),
+    width=1400, height=800
 )
+
+# ─── RENDER ───
+st.markdown(f"""
+**Demand Curve:** P = {b:.1f} – {s:.1f}·Q  
+**Original Consumer Surplus:** {orig_cs:.1f}  
+**Additional Consumer Surplus:** {add_cs:.1f}  
+**Total Consumer Surplus:** {total_cs:.1f}
+""")
 
 st.plotly_chart(fig)
