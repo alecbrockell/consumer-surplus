@@ -8,14 +8,12 @@ P_new      = 40        # new, lower price
 Q_max      = 40        # x-axis limit
 
 st.markdown("""
-## 🎯 What This App Shows
+## 🎯 How much does a price drop benefit consumers? It depends on their demand curves.
 
-This app visualizes **consumer surplus** under a linear demand curve that always pivots through the same point (Q = 10, P = 50).  
-Use the slider to change the **slope of the demand curve** (i.e., elasticity) and see how:
+This app visualizes **consumer surplus** under a linear demand curve that always pivots through the same initial consumption bundle (Q = 10, P = 50). Use the slider to change the **slope of the demand curve** (i.e., elasticity) and see how:
 
 - The **original CS** and the **additional CS** from a price drop (from 50 to 40) change
-- The **shape** of demand affects total consumer welfare, even if price and quantity at equilibrium are fixed
-
+- The **shape** of the demand curve affects total consumer welfare, even with the same price drop
 """)
 
 # ── SLIDER ──
