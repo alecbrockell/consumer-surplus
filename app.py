@@ -63,7 +63,7 @@ fig.add_trace(go.Scatter(
 
 # **Lock axes here**
 fig.update_layout(
-    xaxis=dict(range=[0,20], autorange=False, fixedrange=True, title="Quantity"),
+    xaxis=dict(range=[0,40], autorange=False, fixedrange=True, title="Quantity"),
     yaxis=dict(range=[0,100], autorange=False, fixedrange=True, title="Price"),
     width=1400, height=800,
     title="Consumer Surplus Before & After Price Drop",
