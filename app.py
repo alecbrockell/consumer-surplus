@@ -10,7 +10,7 @@ Q_max      = 40        # x-axis limit
 st.markdown("""
 ## 💡 Consumer Surplus and Demand
 
-This app visualizes **consumer surplus (CS)** under a linear demand curve that always pivots through the same initial consumption bundle (Q = 10, P = 50). Use the slider to change the **slope of the demand curve** (i.e., elasticity) and see how:
+This app visualizes **consumer surplus (CS)** under a linear demand curve that always pivots through the same initial consumption bundle (Q = 10, P = 50). Use the slider to change the **slope of the demand curve** (i.e. the price elasticity of demand at each point) and see how:
 
 - The **original CS** and the **additional CS** from a price drop (from 50 to 40) change
 - The **shape** of the demand curve affects **total CS** (i.e. the person's "welfare")
