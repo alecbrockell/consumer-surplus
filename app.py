@@ -7,6 +7,17 @@ Q_eq, P_eq = 10, 50    # original equilibrium
 P_new      = 40        # new, lower price
 Q_max      = 40        # x-axis limit
 
+st.markdown("""
+## 🎯 What This App Shows
+
+This app visualizes **consumer surplus** under a linear demand curve that always pivots through the same point (Q = 10, P = 50).  
+Use the slider to change the **slope of the demand curve** (i.e., elasticity) and see how:
+
+- The **original CS** and the **additional CS** from a price drop (from 50 to 40) change
+- The **shape** of demand affects total consumer welfare, even if price and quantity at equilibrium are fixed
+
+""")
+
 # ── SLIDER ──
 s = st.slider("Slope of Demand Curve", 0.5, 5.0, 1.0, 0.1)
 
