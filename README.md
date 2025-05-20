@@ -12,7 +12,7 @@ Built with [Streamlit](https://streamlit.io/) and [Plotly](https://plotly.com/py
 The plot displays:
 - A **linear demand curve** that always pivots through the same equilibrium point (Price = 50, Quantity = 10)
 - The **original price** (dashed line at P = 50)
-- A **new lower price** (dotted purple line at P = 45)
+- A **new lower price** (dotted purple line at P = 40)
 - **Consumer Surplus (CS)** at the original price, shaded in green
 - **Additional CS** from the price drop, shaded in purple
 
