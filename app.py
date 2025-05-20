@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 
 # ── PARAMETERS ──
 Q_eq, P_eq = 10, 50    # original equilibrium
-P_new      = 40        # new, lower price
+P_new      = 45        # new, lower price
 Q_max      = 40        # x-axis limit
 
 # ── SLIDER ──
