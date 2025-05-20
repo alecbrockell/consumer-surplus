@@ -39,9 +39,9 @@ total_cs = orig_cs + add_cs              # and total CS
 # ── DISPLAY NUMBERS ──
 st.markdown(f"""
 **Demand Curve:** P = {b:.1f} – {s:.1f}·Q  
-**Original CS:** {orig_cs:.1f}  
-**Additional CS:** {add_cs:.1f}  
-**Total CS:** {total_cs:.1f}
+**Original Consumer Surplus:** {orig_cs:.1f}  
+**Additional Consumer Surplus:** {add_cs:.1f}  
+**Total Consumer Surplus:** {total_cs:.1f}
 """)
 
 # ── PREPARE PLOTTING DATA ──
@@ -74,24 +74,40 @@ fig.add_trace(go.Scatter(
 fig.add_trace(go.Scatter(
     x=np.concatenate([Qc, Qc[::-1]]),
     y=np.concatenate([b - s*Qc, np.full_like(Qc, P_eq)]),
-    fill='toself', name='Original CS', opacity=0.4
+    fill='toself', name='Original Consumer Surplus', opacity=0.4
 ))
 
-# Additional CS polygon
+# 1) Rectangle part of Additional CS (0 → Q_eq, P_eq → P_new)
 fig.add_trace(go.Scatter(
-    x=np.concatenate([[Q_eq], Qa, [Q_new], [Q_eq]]),
-    y=np.concatenate([[P_eq], b - s*Qa, [P_new], [P_eq]]),
-    fill='toself', name='Additional CS',
-    fillcolor='purple', line=dict(color='purple'), opacity=0.4
+    x=[0, Q_eq, Q_eq, 0],
+    y=[P_eq, P_eq, P_new, P_new],
+    fill='toself',
+    name='Additional Consumer Surplus',
+    fillcolor='purple',
+    line=dict(color='purple'),
+    opacity=0.4,
 ))
+
+# 2) Triangle part of Additional CS (Q_eq → Q_new under demand)
+if Q_new > Q_eq:
+    # sample the demand curve between Q_eq and Q_new
+    Qt = np.linspace(Q_eq, Q_new, 200)
+    Pt = b - s * Qt
+    fig.add_trace(go.Scatter(
+        x=np.concatenate([Qt, Qt[::-1]]),
+        y=np.concatenate([Pt, np.full_like(Qt, P_new)]),
+        fill='toself',
+        showlegend=False,   # only show one legend item for purple
+        fillcolor='purple',
+        line=dict(color='purple'),
+        opacity=0.4,
+    ))
 
 # Lock axes at 0–40 & 0–100
 fig.update_layout(
     xaxis=dict(range=[0, Q_max], autorange=False, fixedrange=True, title="Quantity"),
     yaxis=dict(range=[0, 100], autorange=False, fixedrange=True, title="Price"),
-    width=800, height=600,
-    title="Consumer Surplus Before & After Price Drop",
-    title_x=0.5
+    width=1400, height=800
 )
 
 st.plotly_chart(fig)
