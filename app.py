@@ -14,6 +14,8 @@ This app visualizes **consumer surplus (CS)** under a linear demand curve that a
 
 - The **original CS** and the **additional CS** from a price drop (from 50 to 40) change
 - The **shape** of the demand curve affects **total CS** (i.e. the person's "welfare")
+
+---
 """)
 
 # ── SLIDER ──
